@@ -1,0 +1,97 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Contact Form 08</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+	
+	<link rel="stylesheet" href="{% static 'css1/style.css'%}">
+
+	</head>
+	<body>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					<h2 class="heading-section"> CHOCOLATE ORDERING</h2>
+				</div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-lg-10">
+					<div class="wrapper img" style="background-image: url({% static 'images/myimage.jpeg' %});">
+						<div class="row">
+							<div class="col-md-9 col-lg-7">
+								<div class="contact-wrap w-100 p-md-5 p-4">
+									<h3 class="mb-4"></h3>
+
+<form method="post" id="personForm" data-cities-url="{% url 'ajax_load_cities' %}" >
+<div class="container"></div>
+    {% csrf_token %}
+	{{ form.as_p }}
+
+    	<div class="col-md-12 ">
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit" >Place Your Order</button>
+				<a class="btn btn-primary" href="logout">Logout</a>
+
+			</div>
+		</div>
+	 {% for mgs in messages %}
+	<div class="card" style="width: 18rem;">
+		<div class="card-body">
+
+			<h6 class="card-subtitle mb-2 text-muted">{{mgs}}</h6>
+			<a href="/" class="card-link">Home</a>
+			<a href="customerorder" class="card-link">return</a>
+		</div>
+	</div>
+	{% endfor %}
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#id_district").change(function () {
+        const url = $("#personForm").attr("data-cities-url");
+        const districtId = $(this).val();
+
+        $.ajax({
+            url: url,
+            data: {
+                'district_id': districtId
+            },
+            success: function (data){
+                $("#id_branch").html(data);
+
+            }
+        });
+
+    });
+</script>
+
+
+
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+
+<!-- <script src="{% static 'js/jquery.min.js'%}"></script>-->
+<!--  <script src="{% static 'js/popper.js'%}"></script>-->
+<!--  <script src="{% static 'js/bootstrap.min.js'%}"></script>-->
+<!--  <script src="{% static 'js/jquery.validate.min.js'%}"></script>-->
+<!--  <script src="{% static 'js/main.js'%}"></script>-->
+
+	</body>
+</html>
+
